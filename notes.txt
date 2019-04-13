@@ -1,0 +1,60 @@
+# Use Godep  or DEP
+dep init -v
+dep ensure -v
+
+--
+
+#gcloud config set project [YOUR_PROJECT_ID]
+
+gcloud config set project ms-tac2
+
+gcloud components install app-engine-go
+
+
+gcloud app deploy
+
+gcloud app browse
+
+https://ms-tac2.appspot.com
+
+gcloud logging logs list
+
+gcloud app versions list
+
+
+#gcloud app logs tail --logs=stdout
+gcloud app logs tail -s default
+
+-- app.yaml
+# GAE config file for go 1.9
+runtime: go
+api_version: go1
+
+handlers:
+- url: /static
+  static_dir: static
+- url: /.*
+  script: _go_app
+
+env_variables:
+  #Format: MYSQL_CONNECTION: DB_USER:DB_PASSWORD@tcp(IP:3306)/DATABASE
+  # Values for password and project to be substituted by build script
+  MYSQL_CONNECTION: proxyuser:_DB_PASSWORD@unix(/cloudsql/PROJECT_ID:us-central1:devflowapp)/messagesdb
+  OAUTH2_CALLBACK: https://<your-project-id>.appspot.com/oauth2callback
+  
+---
+see
+
+https://cloud.google.com/appengine/docs/standard/go111/config/appref#environment_variables
+
+https://medium.com/@val_deleplace/app-engine-standard-in-go-en-route-to-1-11-6c65cb7f664b
+
+-------------
+
+go get -u google.golang.org/appengine
+
+import "google.golang.org/appengine"
+
+-----
+
+

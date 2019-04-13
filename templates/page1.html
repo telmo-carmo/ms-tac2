@@ -1,0 +1,65 @@
+{{define "title"}}A templated page 1{{end}}
+
+{{define "body"}}
+<h1>Hello from a templated page 1</h1>
+<p>I am the MAN!</p>
+    
+  <input id="slider1" type="text" 
+    data-slider-min="0" data-slider-max="20" data-slider-step="1" data-slider-value="14"/>
+   &nbsp;&nbsp;
+   <input id="s1tx" type="text" value="14" style="width: 2em" maxLength="2"/>
+   <br/><br/>
+   <div>
+      <table id="table1" class="table table-bordered table-striped">
+          <thead>
+              <tr>
+                <th class="col-sm-1" data-field="id">Name</th>
+                <th class="col-sm-3" data-field="name">Job</th>
+                <th class="col-sm-3" data-field="name">Salary</th>
+              </tr>
+          </thead>
+      </table>
+    </div>
+{{end}}
+
+{{define "footer"}}
+<script>
+$(function(){
+
+  var mySlider = $("#slider1").bootstrapSlider();
+
+  $("#bt1").click(function() {
+    var val = mySlider.bootstrapSlider('getValue');
+    console.log("slider:" + val);
+  });
+  
+  mySlider.on("slide", function(ev) {
+    $("#s1tx").val(ev.value);
+  });
+
+  $("#s1tx").blur(function() {
+    mySlider.bootstrapSlider('setValue', $(this).val());
+  });
+  
+//Activated the table
+  var tableClient = $('#table1').DataTable({
+      "lengthMenu": [[4, 8, -1], [4, 8, "All"]],
+      "ajax": {
+          "url": "/api/bonus/",
+          "type": "GET",
+          "success" :  function(data){
+              $.each(data, function(ind, obj){
+                  
+                  tableClient.row.add([
+                      obj.ename,
+                      obj.job,
+                      obj.sal,
+                  ]).draw();
+              });
+          }
+      },
+  });
+  
+});
+</script>
+{{end}}

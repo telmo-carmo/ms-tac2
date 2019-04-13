@@ -1,0 +1,6 @@
+---
+applications:
+- name: ms-tac2
+  random-route: true
+  memory: 64M
+  disk_quota: 64M

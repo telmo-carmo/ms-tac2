@@ -1,0 +1,60 @@
+{{define "title"}}A form 1{{end}}
+
+{{define "body"}}
+<link href='/static/css/jquery-ui.min.css' rel="stylesheet"/>
+
+<div class="container">
+    <form method="post" action='/form1'>
+      <div class="form-group row">
+        <label class="control-label col-sm-2" for="name">Name:</label>
+        <div class="col-sm-10">
+          <input class='form-control' type="text" name="name" placeholder="your name" value="{{.Name}}"/>
+        </div>
+      </div>
+      <div class="form-group row">
+        <label class="control-label col-sm-2" for="phone">Phone:</label>
+        <div class="col-sm-8">
+          <input class='form-control' type="phone" name="phone" placeholder="your Phone" value="{{.Phone}}"/>
+        </div>
+      </div>
+      <div class="form-group row">
+        <label class="control-label col-sm-2" for="age">Age:</label>
+        <div class="col-sm-2">
+          <input class='form-control' type="age" name="age" placeholder="age" value="{{.Age}}"/>
+        </div>
+      </div>
+
+      <div class="form-group row">
+        <label class="control-label col-sm-2" for="comments">Comments:</label>
+        <div class="col-sm-10">
+          <textarea class='form-control' name="comments"></textarea><br />
+        </div>  
+      </div>
+
+      <div class="form-group row">
+        <label class="control-label col-sm-2" for="date1">Date:</label>
+        <div class="col-sm-2">
+          <input class='form-control dtpick' type="text" name="date1"/>
+        </div>  
+      </div>
+
+      <div class="form-group row">
+        <div class="col-sm-offset-2 col-sm-10">
+          <button class='btn btn-primary' type="submit">Submit</button>
+        </div>
+      </div>
+    </form>
+  </div>
+
+{{end}}
+
+
+{{define "footer"}}
+<script src='/static/js/jquery-ui.min.js'></script>
+<script src='/static/js/datepicker-pt.js'></script>
+<script>
+$(function() {
+    $( ".dtpick" ).datepicker({ dateFormat: 'dd-mm-yy'  });
+});
+</script>
+{{end}}

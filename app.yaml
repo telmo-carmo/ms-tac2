@@ -1,0 +1,13 @@
+# GAE config file
+runtime: go111
+
+env_variables:
+  MY_BUCKET_NAME: "example-gcs-bucket"
+
+handlers:
+- url: /static
+  static_dir: static
+  
+- url: /.*
+  script: auto
+

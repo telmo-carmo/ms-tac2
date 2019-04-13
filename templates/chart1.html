@@ -1,0 +1,69 @@
+{{define "title"}}A ChartJs 1{{end}}
+
+{{define "body"}}
+
+<div class="container">
+  <!-- bar chart canvas element -->
+  <canvas id="chart1" width="600" height="400"></canvas>
+  <p id="caption">The chart is displaying a simple line chart.</p>
+</div>  
+
+{{end}}
+
+
+{{define "footer"}}
+<script src='/static/js/moment.min.js'></script>
+<script src="/static/js/Chart.min.js"></script>
+<script>
+// line chart data
+ var chartData  = {
+   labels : ["January", "February", "March", "April", "May", "June", "July", "August"],
+   datasets : [
+        {
+          label:      "{{.Label1}}",
+          fill: false,
+          fillColor:            "rgba(151,187,205,0.2)",
+          borderColor:          "rgba(151,187,205,1)",
+          pointBackgroundColor: "rgba(151,187,205,1)",
+          pointBorderColor: "#fff",
+          pointHighlightFill: "#fff",
+          pointHighlightStroke: "rgba(151,187,205,1)",
+          bezierCurve: false,
+          data:  [{{- range $val := .Vals1 -}}
+                     {{$val}}, 
+                  {{- end}}],
+          spanGaps: false
+        },
+        {
+          label: "Despesas",
+          backgroundColor: "rgba(255,99,132,0.2)",
+          borderColor: "rgba(255,99,132,1)",
+          pointBorderColor: "#fff",
+          pointBackgroundColor: "rgba(255,99,132,1)",
+          pointBorderColor: "#fff",
+          data: [{{range .Vals2 -}}{{.}},{{- end}}],
+          fill: false
+        }
+      ]
+ }
+ 
+    Chart.defaults.global.animationSteps = 50;
+    Chart.defaults.global.tooltipYPadding = 16;
+    Chart.defaults.global.tooltipCornerRadius = 0;
+    Chart.defaults.global.tooltipTitleFontStyle = "normal";
+    Chart.defaults.global.tooltipFillColor = "rgba(0,0,0,0.8)";
+    Chart.defaults.global.animationEasing = "easeOutBounce";
+    Chart.defaults.global.responsive = false;
+    Chart.defaults.global.scaleLineColor = "black";
+    Chart.defaults.global.scaleFontSize = 16;
+ 
+  // get bar chart canvas
+  var ctx = document.getElementById("chart1").getContext("2d");
+ 
+  var myChart = new Chart(ctx, {
+    type: 'line',
+    data: chartData,
+  });
+
+</script>
+{{end}}
