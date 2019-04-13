@@ -1,6 +1,6 @@
 /*
 
-A simple Micro Service App
+A simple Micro Service in GO 1.12
 ---
 
 https://github.com/PacktPublishing/Go-Programming-Blueprints
@@ -16,6 +16,10 @@ also runs on IBM Cloud with GO runtime
 
 https://ms-tac2.eu-gb.mybluemix.net/api/bonus/
 https://ms-tac2.eu-gb.mybluemix.net/about
+
+or
+
+https://github.com/telmo-carmo/ms-tac2
 
 */
 package main
